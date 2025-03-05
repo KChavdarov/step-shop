@@ -1,0 +1,33 @@
+// CSS Reset
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+// Generic buttons
+
+button,
+.button {
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
