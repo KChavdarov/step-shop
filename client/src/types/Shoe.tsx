@@ -1,0 +1,18 @@
+export type Shoe = {
+    _id: string,
+    _ownerId: string,
+    _createdAt: number,
+    make: string,
+    model: string,
+    description: string,
+    colors: string[],
+    sizes: number[],
+    images: string[],
+    materials: string[],
+    types: string[],
+    genders: string[],
+    basePrice: number,
+    discountRate: number,
+    currentPrice: number,
+    isPromo: boolean,
+}

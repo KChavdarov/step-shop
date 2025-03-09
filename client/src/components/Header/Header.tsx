@@ -9,6 +9,8 @@ function Header() {
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/login'>Login</NavLink>
                 <NavLink to='/register'>Register</NavLink>
+                <NavLink to='/create'>Create</NavLink>
+                <NavLink to='/catalogue'>Catalogue</NavLink>
                 <NavLink to='/todo'>To Do List</NavLink>
             </nav>
         </header>
