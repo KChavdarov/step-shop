@@ -9,10 +9,11 @@ import { Home } from './components/pages/Home/Home';
 import { Create } from './components/pages/Admin/Create/Create';
 import { Edit } from './components/pages/Admin/Edit/Edit';
 import { Details } from './components/pages/Details/Details';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <Header></Header>
             <main className='site-content'>
                 <Routes>
@@ -27,7 +28,7 @@ function App() {
                 </Routes>
             </main>
             <Footer></Footer>
-        </>
+        </AuthProvider>
     );
 }
 
