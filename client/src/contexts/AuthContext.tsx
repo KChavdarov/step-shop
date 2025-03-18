@@ -1,4 +1,4 @@
-import { createContext, ReactElement, useEffect, useState } from "react";
+import { createContext, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { User } from "../types/User";
 import * as authService from "../services/authService";
 
@@ -25,32 +25,35 @@ export const AuthContext = createContext<AuthContext>(initialState);
 
 export function AuthProvider({ children }: Props) {
     const [user, setUser] = useState<User | null>(null);
-    useEffect(() => { loadUser(); }, []);
 
-    async function login(email: string, password: string) {
+    const login = useCallback(async function login(email: string, password: string) {
         const newUser = await authService.login(email, password);
         sessionStorage.setItem('user', JSON.stringify(newUser));
         setUser(() => newUser);
-    }
+    }, []);
 
-    async function register(email: string, password: string) {
+    const register = useCallback(async function register(email: string, password: string) {
         const newUser = await authService.register(email, password);
         sessionStorage.setItem('user', JSON.stringify(newUser));
         setUser(() => newUser);
-    }
+    }, []);
 
-    async function logout() {
+    const logout = useCallback(async function logout() {
         await authService.logout(user?.authToken || '');
         sessionStorage.clear();
-    }
+    }, [user?.authToken]);
 
-    async function loadUser() {
+    const loadUser = useCallback(async function loadUser() {
         const currentUser = sessionStorage.getItem('user');
         setUser(() => currentUser && JSON.parse(currentUser));
-    }
+    }, []);
+
+    const contextValue = useMemo(() => ({ user, login, register, logout }), [login, logout, register, user]);
+
+    useEffect(() => { loadUser(); }, [loadUser]);
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout }}>
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     );
